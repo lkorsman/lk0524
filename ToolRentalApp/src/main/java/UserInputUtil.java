@@ -6,8 +6,6 @@ import java.util.Scanner;
  */
 public class UserInputUtil {
 
-    volatile String test = "hello";
-
     /**
      * Prompts user for input and returns a Tool.Code based on user input
      * @param scanner Scanner object to get keyboard input
