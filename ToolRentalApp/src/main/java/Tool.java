@@ -72,9 +72,7 @@ public class Tool {
         int chargeableDays = 0;
 
         /*
-         Per requirements: "Count of chargeable days, from day after checkout through and including due date, excluding
-         “no charge” days as specified by the tool type." Based on this, we do not include checkout date in charge
-         calculation. So we start our chargeable days calculation 1 day after checkoutDate.
+         Per requirements: chargeable days calculation starts 1 day after checkoutDate.
          */
         LocalDate currentDate = checkoutDate.plusDays(1);
 
@@ -126,11 +124,6 @@ public class Tool {
         int julyMonth = 7;
         int fourthDay = 4;
 
-        // First check if date is a Monday
-//        if (date.getDayOfWeek() != DayOfWeek.MONDAY) {
-//            return false;
-//        }
-
         return (date.getMonthValue() == julyMonth && date.getDayOfMonth() == fourthDay);
     }
 
@@ -162,6 +155,5 @@ public class Tool {
         JAKD,
         JAKR,
         LADW
-
     }
 }

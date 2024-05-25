@@ -86,7 +86,7 @@ public class ToolRentalApplication {
         double preDiscountCharge = chargeableDays * tool.getDailyCharge();
 
         double discountAmount = (preDiscountCharge * discountPercentage) / 100;
-        BigDecimal roundedDiscountAmount = BigDecimal.valueOf(discountAmount).setScale(2, RoundingMode.HALF_UP); // TODO come back and understand this calculation
+        BigDecimal roundedDiscountAmount = BigDecimal.valueOf(discountAmount).setScale(2, RoundingMode.HALF_UP);
 
         BigDecimal finalCharge = BigDecimal.valueOf(preDiscountCharge).subtract(roundedDiscountAmount);
 
