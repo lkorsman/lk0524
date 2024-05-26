@@ -9,42 +9,21 @@ public class ToolRentalApplicationTest {
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yy");
 
     @Test(expected = Exception.class)
-    public void testCheckoutWithInvalidRentalDays() throws Exception {
+    public void testCheckoutWithInvalidRentalNegativeDays() throws Exception {
         // When
         ToolRentalApplication.checkout(Tool.Code.JAKR, LocalDate.of(2015, 9, 3), -5, 10);
     }
 
     @Test(expected = Exception.class)
-    public void testCheckoutWithInvalidDiscountPercent() throws Exception {
+    public void testCheckoutWithInvalidDiscountPercentAbove100() throws Exception {
         // When
         ToolRentalApplication.checkout(Tool.Code.JAKR, LocalDate.of(2015, 9, 3), 5, 101);
     }
 
     @Test(expected = Exception.class)
-    public void testCheckoutWithInvalidTool() throws Exception {
+    public void testCheckoutWithInvalidNullTool() throws Exception {
         // When
         ToolRentalApplication.checkout(null, LocalDate.of(2015, 9, 3), 5, 101);
-    }
-
-    @Test(expected = Exception.class)
-    public void testInvalidCheckoutWithInvalidDiscountAboveOneHundredPercent() throws Exception {
-        // When
-        RentalAgreement agreement = ToolRentalApplication.checkout(Tool.Code.JAKR, LocalDate.of(2015, 9, 3), 5, 101);
-
-        // Then
-        assertNotNull(agreement);
-        assertEquals(Tool.Code.JAKR, agreement.getTool().getCode());
-        assertEquals("Jackhammer", agreement.getTool().getToolType());
-        assertEquals("Ridgid", agreement.getTool().getBrand());
-        assertEquals(5, agreement.getRentalDays());
-        assertEquals("09/03/15", agreement.getCheckoutDate().format(dateTimeFormatter));
-        assertEquals("09/08/15", agreement.getDueDate().format(dateTimeFormatter));
-        assertEquals(2.99, agreement.getTool().getDailyCharge(), 0);
-        assertEquals(2, agreement.getChargedDays());
-        assertEquals(5.98, agreement.getPreDiscountCharge(), 0);
-        assertEquals(0, agreement.getDiscountPercentage());
-        assertEquals(0, agreement.getDiscountAmount().doubleValue(), 0);
-        assertEquals(5.98, agreement.getFinalCharge().doubleValue(), 0);
     }
 
     @Test
@@ -55,8 +34,8 @@ public class ToolRentalApplicationTest {
         // Then
         assertNotNull(agreement);
         assertEquals(Tool.Code.LADW, agreement.getTool().getCode());
-        assertEquals("Ladder", agreement.getTool().getToolType());
-        assertEquals("Werner", agreement.getTool().getBrand());
+        assertEquals(ApplicationConstants.TOOL_TYPE_LADDER, agreement.getTool().getToolType());
+        assertEquals(ApplicationConstants.BRAND_WERNER, agreement.getTool().getBrand());
         assertEquals(3, agreement.getRentalDays());
         assertEquals("07/02/20", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("07/05/20", agreement.getDueDate().format(dateTimeFormatter));
@@ -76,8 +55,8 @@ public class ToolRentalApplicationTest {
         // Then
         assertNotNull(agreement);
         assertEquals(Tool.Code.CHNS, agreement.getTool().getCode());
-        assertEquals("Chainsaw", agreement.getTool().getToolType());
-        assertEquals("Stihl", agreement.getTool().getBrand());
+        assertEquals(ApplicationConstants.TOOL_TYPE_CHAINSAW, agreement.getTool().getToolType());
+        assertEquals(ApplicationConstants.BRAND_STIHL, agreement.getTool().getBrand());
         assertEquals(5, agreement.getRentalDays());
         assertEquals("07/02/15", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("07/07/15", agreement.getDueDate().format(dateTimeFormatter));
@@ -97,8 +76,8 @@ public class ToolRentalApplicationTest {
         // Then
         assertNotNull(agreement);
         assertEquals(Tool.Code.JAKD, agreement.getTool().getCode());
-        assertEquals("Jackhammer", agreement.getTool().getToolType());
-        assertEquals("DeWalt", agreement.getTool().getBrand());
+        assertEquals(ApplicationConstants.TOOL_TYPE_JACKHAMMER, agreement.getTool().getToolType());
+        assertEquals(ApplicationConstants.BRAND_DEWALT, agreement.getTool().getBrand());
         assertEquals(6, agreement.getRentalDays());
         assertEquals("09/03/15", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("09/09/15", agreement.getDueDate().format(dateTimeFormatter));
@@ -118,8 +97,8 @@ public class ToolRentalApplicationTest {
         // Then
         assertNotNull(agreement);
         assertEquals(Tool.Code.JAKR, agreement.getTool().getCode());
-        assertEquals("Jackhammer", agreement.getTool().getToolType());
-        assertEquals("Ridgid", agreement.getTool().getBrand());
+        assertEquals(ApplicationConstants.TOOL_TYPE_JACKHAMMER, agreement.getTool().getToolType());
+        assertEquals(ApplicationConstants.BRAND_RIDGID, agreement.getTool().getBrand());
         assertEquals(9, agreement.getRentalDays());
         assertEquals("07/02/15", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("07/11/15", agreement.getDueDate().format(dateTimeFormatter));

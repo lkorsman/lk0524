@@ -111,7 +111,6 @@ public class Tool {
      * @return true if date is Fourth of July or Labor Day, false if not
      */
     private static boolean isHoliday(LocalDate date) {
-
         return isFourthOfJuly(date) || isLaborDay(date);
     }
 
