@@ -20,7 +20,7 @@ import java.util.Scanner;
  *    - Weekend charge (boolean)
  *    - Holiday charge (boolean)
  * - Holidays:
- *    - Independence Day July 4
+ *    - Independence Day July 4 (if on Saturday, then observe on Friday, if on Sunday, then observe on Monday)
  *    - Labor Day First Monday in September
  * - Checkout Requirements:
  *    - Tool code
@@ -65,6 +65,15 @@ public class ToolRentalApplication {
         }
     }
 
+    /**
+     * Produces a RentalAgreement for a Tool
+     * @param code the type of tool
+     * @param checkoutDate the beginning date of the Rental Agreement
+     * @param rentalDayCount the number of days of the Rental Agreement
+     * @param discountPercentage the amount of discount given
+     * @return a Rental Agreement based in input parameters
+     * @throws Exception if rentalDayCount is fewer than 1 or if discountPercentage is not in range 0 to 100 inclusive
+     */
     public static RentalAgreement checkout(Tool.Code code, LocalDate checkoutDate, int rentalDayCount, int discountPercentage) throws Exception {
         Tool tool = ToolRepository.getToolByCode(code);
         LocalDate dueDate;
@@ -83,12 +92,13 @@ public class ToolRentalApplication {
         // Calculate chargeable days
         int chargeableDays = Tool.calculateChargeableDays(tool, checkoutDate, dueDate);
 
-        double preDiscountCharge = chargeableDays * tool.getDailyCharge();
+        BigDecimal preDiscountCharge = tool.getDailyCharge().multiply(BigDecimal.valueOf(chargeableDays));
 
-        double discountAmount = (preDiscountCharge * discountPercentage) / 100;
-        BigDecimal roundedDiscountAmount = BigDecimal.valueOf(discountAmount).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal discountAmount = preDiscountCharge.multiply(BigDecimal.valueOf(discountPercentage)).divide(BigDecimal.valueOf(100));
 
-        BigDecimal finalCharge = BigDecimal.valueOf(preDiscountCharge).subtract(roundedDiscountAmount);
+        BigDecimal roundedDiscountAmount = discountAmount.setScale(2, RoundingMode.HALF_UP);
+
+        BigDecimal finalCharge = preDiscountCharge.subtract(roundedDiscountAmount);
 
         return new RentalAgreement(
                 tool,

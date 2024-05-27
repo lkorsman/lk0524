@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -9,7 +10,7 @@ public class Tool {
     private final Code code;
     private final String toolType;
     private final String brand;
-    private final double dailyCharge;
+    private final BigDecimal dailyCharge;
     private final boolean weekdayCharge;
     private final boolean weekendCharge;
     private final boolean holidayCharge;
@@ -18,7 +19,7 @@ public class Tool {
             Code code,
             String toolType,
             String brand,
-            double dailyCharge,
+            BigDecimal dailyCharge,
             boolean weekdayCharge,
             boolean weekendCharge,
             boolean holidayCharge
@@ -44,7 +45,7 @@ public class Tool {
         return brand;
     }
 
-    public double getDailyCharge() {
+    public BigDecimal getDailyCharge() {
         return dailyCharge;
     }
 
@@ -111,19 +112,34 @@ public class Tool {
      * @return true if date is Fourth of July or Labor Day, false if not
      */
     private static boolean isHoliday(LocalDate date) {
-        return isFourthOfJuly(date) || isLaborDay(date);
+        return isObservableFourthOfJuly(date) || isLaborDay(date);
     }
 
     /**
-     * Determines if a LocalDate is Fourth of July
+     * Determines if a LocalDate is observed fourth of July
      * @param date LocalDate representing a day
-     * @return true if date is Fourth of July, false if not
+     * @return true if date is observed fourth of July, false if not
      */
-    private static boolean isFourthOfJuly(LocalDate date) {
-        int julyMonth = 7;
-        int fourthDay = 4;
+    private static boolean isObservableFourthOfJuly(LocalDate date) {
+        return date.equals(observedFourthOfJuly(date.getYear()));
+    }
 
-        return (date.getMonthValue() == julyMonth && date.getDayOfMonth() == fourthDay);
+    /**
+     * Determines the observed day of fourth of July
+     * @param year to check observed date
+     * @return day when fourth of July is observed of given year
+     */
+    private static LocalDate observedFourthOfJuly(int year) {
+        LocalDate fourthOfJuly = LocalDate.of(year, 7, 4);
+        DayOfWeek julyFourthDayOfWeek = fourthOfJuly.getDayOfWeek();
+
+        if (julyFourthDayOfWeek == DayOfWeek.SATURDAY) {
+            return fourthOfJuly.minusDays(1);
+        } else if (julyFourthDayOfWeek == DayOfWeek.SUNDAY) {
+            return fourthOfJuly.plusDays(1);
+        } else {
+            return fourthOfJuly;
+        }
     }
 
     /**

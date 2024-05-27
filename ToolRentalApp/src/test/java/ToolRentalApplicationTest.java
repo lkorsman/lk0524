@@ -39,9 +39,9 @@ public class ToolRentalApplicationTest {
         assertEquals(3, agreement.getRentalDays());
         assertEquals("07/02/20", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("07/05/20", agreement.getDueDate().format(dateTimeFormatter));
-        assertEquals(1.99, agreement.getTool().getDailyCharge(), 0);
+        assertEquals(1.99, agreement.getTool().getDailyCharge().doubleValue(), 0);
         assertEquals(2, agreement.getChargedDays());
-        assertEquals(3.98, agreement.getPreDiscountCharge(), 0);
+        assertEquals(3.98, agreement.getPreDiscountCharge().doubleValue(), 0);
         assertEquals(10, agreement.getDiscountPercentage());
         assertEquals(0.40, agreement.getDiscountAmount().doubleValue(), 0);
         assertEquals(3.58, agreement.getFinalCharge().doubleValue(), 0);
@@ -60,9 +60,9 @@ public class ToolRentalApplicationTest {
         assertEquals(5, agreement.getRentalDays());
         assertEquals("07/02/15", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("07/07/15", agreement.getDueDate().format(dateTimeFormatter));
-        assertEquals(1.49, agreement.getTool().getDailyCharge(), 0);
+        assertEquals(1.49, agreement.getTool().getDailyCharge().doubleValue(), 0);
         assertEquals(3, agreement.getChargedDays());
-        assertEquals(4.47, agreement.getPreDiscountCharge(), 0);
+        assertEquals(4.47, agreement.getPreDiscountCharge().doubleValue(), 0);
         assertEquals(25, agreement.getDiscountPercentage());
         assertEquals(1.12, agreement.getDiscountAmount().doubleValue(), 0);
         assertEquals(3.35, agreement.getFinalCharge().doubleValue(), 0);
@@ -81,9 +81,9 @@ public class ToolRentalApplicationTest {
         assertEquals(6, agreement.getRentalDays());
         assertEquals("09/03/15", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("09/09/15", agreement.getDueDate().format(dateTimeFormatter));
-        assertEquals(2.99, agreement.getTool().getDailyCharge(), 0);
+        assertEquals(2.99, agreement.getTool().getDailyCharge().doubleValue(), 0);
         assertEquals(3, agreement.getChargedDays());
-        assertEquals(8.97, agreement.getPreDiscountCharge(), 0);
+        assertEquals(8.97, agreement.getPreDiscountCharge().doubleValue(), 0);
         assertEquals(0, agreement.getDiscountPercentage());
         assertEquals(0.0, agreement.getDiscountAmount().doubleValue(), 0);
         assertEquals(8.97, agreement.getFinalCharge().doubleValue(), 0);
@@ -102,11 +102,11 @@ public class ToolRentalApplicationTest {
         assertEquals(9, agreement.getRentalDays());
         assertEquals("07/02/15", agreement.getCheckoutDate().format(dateTimeFormatter));
         assertEquals("07/11/15", agreement.getDueDate().format(dateTimeFormatter));
-        assertEquals(2.99, agreement.getTool().getDailyCharge(), 0);
-        assertEquals(6, agreement.getChargedDays());
-        assertEquals(17.94, agreement.getPreDiscountCharge(), 0);
+        assertEquals(2.99, agreement.getTool().getDailyCharge().doubleValue(), 0);
+        assertEquals(5, agreement.getChargedDays());
+        assertEquals(14.95, agreement.getPreDiscountCharge().doubleValue(), 0);
         assertEquals(0, agreement.getDiscountPercentage());
         assertEquals(0.0, agreement.getDiscountAmount().doubleValue(), 0);
-        assertEquals(17.94, agreement.getFinalCharge().doubleValue(), 0);
+        assertEquals(14.95, agreement.getFinalCharge().doubleValue(), 0);
     }
 }

@@ -2,6 +2,8 @@
   This class is meant to create an instance of the Tool object based on a Tool.Code
  */
 
+import java.math.BigDecimal;
+
 public class ToolRepository {
 
     /**
@@ -16,7 +18,7 @@ public class ToolRepository {
                         code,
                         ApplicationConstants.TOOL_TYPE_CHAINSAW,
                         ApplicationConstants.BRAND_STIHL,
-                        1.49,
+                        BigDecimal.valueOf(1.49),
                         true,
                         false,
                         true
@@ -27,7 +29,7 @@ public class ToolRepository {
                         code,
                         ApplicationConstants.TOOL_TYPE_JACKHAMMER,
                         ApplicationConstants.BRAND_RIDGID,
-                        2.99,
+                        BigDecimal.valueOf(2.99),
                         true,
                         false,
                         false
@@ -38,7 +40,7 @@ public class ToolRepository {
                         code,
                         ApplicationConstants.TOOL_TYPE_JACKHAMMER,
                         ApplicationConstants.BRAND_DEWALT,
-                        2.99,
+                        BigDecimal.valueOf(2.99),
                         true,
                         false,
                         false
@@ -49,7 +51,7 @@ public class ToolRepository {
                         code,
                         ApplicationConstants.TOOL_TYPE_LADDER,
                         ApplicationConstants.BRAND_WERNER,
-                        1.99,
+                        BigDecimal.valueOf(1.99),
                         true,
                         true,
                         false

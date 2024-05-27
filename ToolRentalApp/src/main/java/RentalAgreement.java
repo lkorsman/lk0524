@@ -12,7 +12,7 @@ public class RentalAgreement {
     private final LocalDate checkoutDate;
     private final LocalDate dueDate;
     private final int chargedDays;
-    private final double preDiscountCharge;
+    private final BigDecimal preDiscountCharge;
     private final int discountPercentage;
     private final BigDecimal discountAmount;
     private final BigDecimal finalCharge;
@@ -23,7 +23,7 @@ public class RentalAgreement {
             LocalDate checkoutDate,
             LocalDate dueDate,
             int chargedDays,
-            double preDiscountCharge,
+            BigDecimal preDiscountCharge,
             int discountPercentage,
             BigDecimal discountAmount,
             BigDecimal finalCharge
@@ -59,7 +59,7 @@ public class RentalAgreement {
         return chargedDays;
     }
 
-    public double getPreDiscountCharge() {
+    public BigDecimal getPreDiscountCharge() {
         return preDiscountCharge;
     }
 

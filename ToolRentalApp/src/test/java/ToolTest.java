@@ -33,14 +33,28 @@ public class ToolTest {
     }
 
     @Test
-    public void testFourthOfJulyOnWeekendShouldNotBeCharged() {
+    public void testFourthOfJulyOnSaturdayShouldNotBeCharged() {
         // Given
-        LocalDate dayBeforeFourthOfJuly = LocalDate.of(2015, 7, 3);
-        LocalDate fourthOfJuly = LocalDate.of(2015, 7, 4);
+        LocalDate julySecond = LocalDate.of(2015, 7, 2);
+        LocalDate julyThird = LocalDate.of(2015, 7, 3);
         Tool tool = ToolRepository.getToolByCode(Tool.Code.LADW);
 
         // When
-        int isChargeableDays = Tool.calculateChargeableDays(tool, dayBeforeFourthOfJuly, fourthOfJuly);
+        int isChargeableDays = Tool.calculateChargeableDays(tool, julySecond, julyThird);
+
+        // Then
+        assertEquals(0, isChargeableDays);
+    }
+
+    @Test
+    public void testFourthOfJulyOnSundayShouldNotBeCharged() {
+        // Given
+        LocalDate julyFourth = LocalDate.of(2021, 7, 4);
+        LocalDate julyFifth = LocalDate.of(2021, 7, 5);
+        Tool tool = ToolRepository.getToolByCode(Tool.Code.LADW);
+
+        // When
+        int isChargeableDays = Tool.calculateChargeableDays(tool, julyFourth, julyFifth);
 
         // Then
         assertEquals(0, isChargeableDays);

@@ -32,7 +32,7 @@ public class RentalAgreementTest {
                                             checkoutDate,
                                             dueDate,
                                             0,
-                                            2.99,
+                                            BigDecimal.valueOf(2.99),
                                             0,
                                             discountAmount,
                                             finalAmount
