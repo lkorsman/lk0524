@@ -130,7 +130,9 @@ public class Tool {
      * @return day when fourth of July is observed of given year
      */
     private static LocalDate observedFourthOfJuly(int year) {
-        LocalDate fourthOfJuly = LocalDate.of(year, 7, 4);
+        int julyMonth = 7;
+        int fourthDay = 4;
+        LocalDate fourthOfJuly = LocalDate.of(year, julyMonth, fourthDay);
         DayOfWeek julyFourthDayOfWeek = fourthOfJuly.getDayOfWeek();
 
         if (julyFourthDayOfWeek == DayOfWeek.SATURDAY) {
