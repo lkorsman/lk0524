@@ -61,6 +61,5 @@ public class ToolRepository {
                 throw new IllegalArgumentException("Invalid tool code: " + code);
             }
         }
-
     }
 }

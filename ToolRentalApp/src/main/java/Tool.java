@@ -154,7 +154,6 @@ public class Tool {
         int seventhDay = 7;
         int dateDayOfMonth = date.getDayOfMonth();
 
-        // First check if date is a Monday
         if (date.getDayOfWeek() != DayOfWeek.MONDAY) {
             return false;
         }

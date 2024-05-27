@@ -77,27 +77,24 @@ public class ToolRentalApplication {
     public static RentalAgreement checkout(Tool.Code code, LocalDate checkoutDate, int rentalDayCount, int discountPercentage) throws Exception {
         Tool tool = ToolRepository.getToolByCode(code);
         LocalDate dueDate;
+        int minimumRentalDays = 1;
+        int minimumDiscountPercentage = 0;
+        int maximumDiscountPercentage = 100;
+        BigDecimal oneHundred = BigDecimal.valueOf(100L);
 
-        if (rentalDayCount < 1) {
+        if (rentalDayCount < minimumRentalDays) {
             throw new Exception("Rental days must be 1 or greater.");
         }
 
-        if (discountPercentage < 0 || discountPercentage > 100) {
+        if (discountPercentage < minimumDiscountPercentage || discountPercentage > maximumDiscountPercentage) {
             throw new Exception("Discount must be between 0 and 100.");
         }
 
-        // Calculate due date
         dueDate = checkoutDate.plusDays(rentalDayCount);
-
-        // Calculate chargeable days
         int chargeableDays = Tool.calculateChargeableDays(tool, checkoutDate, dueDate);
-
         BigDecimal preDiscountCharge = tool.getDailyCharge().multiply(BigDecimal.valueOf(chargeableDays));
-
-        BigDecimal discountAmount = preDiscountCharge.multiply(BigDecimal.valueOf(discountPercentage)).divide(BigDecimal.valueOf(100));
-
+        BigDecimal discountAmount = preDiscountCharge.multiply(BigDecimal.valueOf(discountPercentage)).divide(oneHundred, RoundingMode.HALF_UP);
         BigDecimal roundedDiscountAmount = discountAmount.setScale(2, RoundingMode.HALF_UP);
-
         BigDecimal finalCharge = preDiscountCharge.subtract(roundedDiscountAmount);
 
         return new RentalAgreement(
