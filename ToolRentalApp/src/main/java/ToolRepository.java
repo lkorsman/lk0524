@@ -1,9 +1,8 @@
+import java.math.BigDecimal;
+
 /*
   This class is meant to create an instance of the Tool object based on a Tool.Code
  */
-
-import java.math.BigDecimal;
-
 public class ToolRepository {
 
     /**
